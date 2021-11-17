@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Beer List</h1>
+
+    <div id="cards" class="container" data-filter="true">
+    </div>
+
+    <script>
+        function getBeerList(beers){
+            for(var i = 0; i< beers.length; i++){
+                let beer = beers[i];
+                let card = $('<div>').addClass('card')
+                    .append(
+                        $('<img>').addClass('card-img-top').attr('src', '/static/' + beer.image).attr('style', 'width: 350px; height: 450px;')
+                    ).append(
+                        $('<p>').addClass('card-body')
+                        .append(
+                            $('<h1>').addClass('card-title').text(beer.name)
+                        ).append(
+                            $('<p>').addClass('card-text').text(beer.brewery)
+                        ).append(
+                            $('<p>').addClass('card-text').text(beer.desc)
+                        ).append(
+                            $('<a>').addClass('btn btn-primary').text('Favorite')
+                            .click(function () {
+                                console.log(beer.id);
+                                $.post("api/favorite", {
+                                    id: beer.id,
+                                    name: 'beer_id'
+                                },
+                                    function (data, status){
+                                        console.log(data + "/n" + status)
+                                    });
+                            })
+                        )
+                );
+                if(i % 3 ==0) {
+                    $('#cards').append(
+                        $('<div>').addClass('card-deck')
+                    );
+                }
+                $('#cards .card-deck').last().append(card);
+            }
+        }
+
+        $(document).ready(function() {
+            $(function () {
+                $.get("api/beers", function (beers) {
+                    getBeerList(beers);
+                });
+            });
+        });
+    </script>
+{% endblock %}

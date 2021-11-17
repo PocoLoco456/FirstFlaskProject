@@ -1,0 +1,36 @@
+.card-img-top {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card-title{
+    vertical-align: center;
+    size: 18px;
+}
+
+.card-text{
+    vertical-align: center;
+    size: 12px;
+}
+
+#Beer{
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+    width: 512px;
+    height: 432px;
+}
+
+#popupAge{
+    padding: 50px; 
+    background-color: white
+}
+
+.ui-content, .ui-page{
+    background-color: #F7E594;
+}
+
+.card{
+    background-color: whitesmoke;
+}

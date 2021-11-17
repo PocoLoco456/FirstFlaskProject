@@ -1,0 +1,31 @@
+
+label {
+    display: block;
+}
+
+input {
+    height: 20px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+form {
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-style: solid;
+    border-width: 3px;
+}
+
+input:invalid {
+    background-color: lightcoral;
+}
+
+input:valid {
+    background-color: white;
+}
+
+input:required {
+    background-color: lightgray;
+}

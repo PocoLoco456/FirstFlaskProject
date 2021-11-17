@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Philly Hops!</title>
+        <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" href="/static/index.css"/>
+        <link rel="stylesheet" href="/static/forms.css"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    </head>
+    <body>
+        <!-- Start of first page -->
+        <div data-role="page">
+            <div data-role="header">
+                <a href="/" class="ui-btn ui-btn-b">Home</a>
+                <h1>Philly Hops!</h1>
+                <a href="/logout" class="ui-btn ui-btn-b">logout</a>
+            </div><!-- /header -->
+            <div data-role="content">
+
+                <h1>Welcome {{ username }}</h1>
+
+                <h2>Your Favorites:</h2>
+
+                <div id="cards" class="container" data-filter="true">
+                </div>
+
+                <script>
+                    function getBeerList(favorites){
+                        for(var i = 0; i< favorites.length; i++){
+                            let favorite = favorites[i];
+                            let card = $('<div>').addClass('card')
+                                .append(
+                                    $('<img>').addClass('card-img-top').attr('src', '/static/' + favorite.image).attr('style', 'width: 350px; height: 450px;')
+                                ).append(
+                                    $('<p>').addClass('card-body')
+                                    .append(
+                                        $('<h1>').addClass('card-title').text(favorite.name)
+                                    ).append(
+                                        $('<p>').addClass('card-text').text(favorite.desc)
+                                    )
+                            );
+                            if(i % 3 ==0) {
+                                $('#cards').append(
+                                    $('<div>').addClass('card-deck')
+                                );
+                            }
+                            $('#cards .card-deck').last().append(card);
+                        }
+                    }
+
+                    $(document).ready(function() {
+                        $(function () {
+                            $.get("api/getFavorites", function (favorites) {
+                                getBeerList(favorites);
+                            });
+                        });
+                    });
+                </script>
+
+            </div><!-- /content -->
+            <div data-role="footer">
+            <div data-role="navbar">
+                <ul>
+                    <li> <a href="about" data-icon="info">About Us</a>
+                    <li> <a href="search" data-icon="search">Search </a>
+                </ul>
+            </div>
+            <h4> Philly Hops! &copy; </h4>
+            </div><!-- /header -->
+        </div><!-- /page -->
+    </body>
+</html>

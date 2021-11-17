@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+            <div data-role="content">
+                <img id="Beer" src="/static/cheers.png"/>
+                
+                <br>
+                <br>
+                
+                <center><h2><b>Helping you discover your new Philly favorites!</b></h2></center>
+                <a href="/locations" class="ui-btn ui-btn-b">Let's go for a drink!</a>
+                <a href="/beers" class="ui-btn ui-btn-b">Look up a drink</a>
+                
+                <div data-role="popup" id="popupAge" data-overlay-theme="a" data-theme="d" data-corners="false"> 
+                    <center>
+                        <h1>
+                            Welcome to Philly Hops!
+                        </h1>
+                        <img id="Beer" src="/static/cheers.png"/>
+                        <p>
+                            In order to use this site, you must be over 21 to enter and view products.
+                        </p>
+                        <a class="ui-btn ui-btn-b" onclick="closepopup()">I am over 21</a>
+                        <a href="google.com" class="ui-btn ui-btn-b">leave Site</a>
+                    </center>
+                </div>
+                
+                <script>
+
+                    function closepopup(){
+                        $("#popupAge").popup('close');
+                    }
+                    
+                    $(document).ready(function(){
+                       setTimeout(function(){
+                           $("#popupAge").popup("open");
+                       },2000);
+                    });
+                    
+                </script>
+
+            </div><!-- /content -->
+{% endblock %}
+

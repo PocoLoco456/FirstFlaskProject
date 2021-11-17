@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Locations List</h1>
+
+    <div id="cards" class="container" data-filter="true">
+    </div>
+
+    <script>
+        function getBeerList(locations){
+            for(var i = 0; i< locations.length; i++){
+                let location = locations[i];
+                let card = $('<div>').addClass('card')
+                    .append(
+                        $('<img>').addClass('card-img-top').attr('src', '/static/' + location.image).attr('style', 'width: 300px; height: 300px;')
+                    ).append(
+                        $('<p>').addClass('card-body')
+                        .append(
+                            $('<h1>').addClass('card-title').text(location.name)
+                        ).append(
+                            $('<p>').addClass('card-text').text(location.location)
+                        ).append(
+                            $('<p>').addClass('card-text').text(location.desc)
+                        ).append(
+                            $('<a>').addClass('btn btn-primary').text('Favorite')
+                            .click(function () {
+                                $.post("api/favorite", {
+                                    id: location.id,
+                                    name: 'location_id'
+                                },
+                                    function (data, status){
+                                        console.log(data + "/n" + status)
+                                    });
+                            })
+                        )
+                );
+                if(i % 3 ==0) {
+                    $('#cards').append(
+                        $('<div>').addClass('card-deck')
+                    );
+                }
+                $('#cards .card-deck').last().append(card);
+            }
+        }
+
+        $(document).ready(function() {
+            $(function () {
+                $.get("api/locations", function (locations) {
+                    getBeerList(locations);
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Search</h1>
+
+    <div id="cards" class="container" data-filter="true">
+    </div>
+
+    <script>
+        function getItemsList(items){
+            for(var i = 0; i< items.length; i++){
+                let item = items[i];
+                let card = $('<div>').addClass('card')
+                    .append(
+                        $('<img>').addClass('card-img-top').attr('src', '/static/' + item.image).attr('style', 'width: 350px; height: 450px;')
+                    ).append(
+                        $('<p>').addClass('card-body')
+                        .append(
+                            $('<h1>').addClass('card-title').text(item.name)
+                        ).append(
+                            $('<p>').addClass('card-text').attr('style', 'size: 14px;').text(item.desc)
+                        )
+                    );
+                if(i % 3 ==0) {
+                    $('#cards').append(
+                        $('<div>').addClass('card-deck')
+                    );
+                }
+                $('#cards .card-deck').last().append(card);
+            }
+        }
+
+        $(document).ready(function() {
+            $(function () {
+                $.get("api/search", function (items) {
+                    getItemsList(items);
+                });
+            });
+        });
+    </script>
+{% endblock %}

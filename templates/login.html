@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Login to view and save your new favorites.</h1>
+        <form action="login" method="post">
+        <!-- FORM FIELDS GO HERE -->
+            <label for="name">Username:</label>
+            <input type="text" name="username" id="username" required>
+            <label for="pwd">Password:</label>
+            <input type="password" name="pwd" id="pwd" required>
+            <br/>
+            <input class="ui-btn ui-btn-b" type="submit" value="submit">
+        </form>
+    <a href="/register" class="ui-btn ui-btn-b">Create an Account</a>
+    <a href="/" class="ui-btn ui-btn-b">Nevermind</a>
+{% endblock %}

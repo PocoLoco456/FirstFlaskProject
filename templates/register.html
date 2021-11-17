@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Register now to discover and save your new favorites.</h1>
+                <form action="register" method="post">
+                <!-- FORM FIELDS GO HERE -->
+                    <label for="name">Username:</label>
+                    <input type="text" name="username" id="username" required>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email" required>
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" name="dob" id="dob" required max="2000-08-19">
+
+                    <label for="pwd">Password:</label>
+                    <input type="password" name="pwd" id="pwd" required>
+
+                    <label for="confirmpwd">Confirm Password:</label>
+                    <input type="password" name="confirmpwd" id="confirmpwd" required>
+                    <br/>
+                    <input type="submit" value="submit">
+                </form>
+                <a href="/" class="ui-btn ui-btn-b">Nevermind</a>
+{% endblock %}
